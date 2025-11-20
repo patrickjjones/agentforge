@@ -92,7 +92,7 @@
   <p>Welcome to AgentForge — where intelligent agents and innovation are forged together.</p>
   <div class="coming-soon">Coming Soon</div>
 
-  <form name="submit-to-google-sheet">
+  <form id="submit-to-google-sheet">
     <input type="email" name="Email" placeholder="Enter your email" required>
     <button type="submit">Notify Me</button>
   </form>
@@ -102,19 +102,30 @@
   <footer>© 2025 AgentForge. All rights reserved.</footer>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwKhfE0I2LEB3p-mKIzQkfdd-3P9ZvyHx2MwwF-jz1XtNzk--nApJBE3VhgTG6mi_snSg/exec';
-    const form = document.forms['submit-to-google-sheet'];
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxiUBSGSSz0GoBA6iSrypf0MiVbgIzdH4g_wRFvxFrng6WSQMkXJJMX8yjXIMhTQ-TcnA/exec';
+    const form = document.getElementById('submit-to-google-sheet');
     const msg = document.getElementById('msg');
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => {
-          msg.style.display = 'block';
-          setTimeout(() => msg.style.display = 'none', 4000);
-          form.reset();
-        })
-        .catch(error => alert('There was an error submitting the form. Please try again.'));
+      const formData = new FormData(form);
+      try {
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors', // bypass CORS restrictions
+          body: formData
+        });
+        msg.style.display = 'block';
+        msg.style.color = '#22c55e';
+        msg.innerText = '✅ Thanks! You’ll be notified soon.';
+        form.reset();
+        setTimeout(() => msg.style.display = 'none', 4000);
+      } catch (error) {
+        msg.style.display = 'block';
+        msg.style.color = '#ef4444';
+        msg.innerText = '⚠️ There was an error submitting the form. Please try again.';
+        console.error('Error!', error);
+      }
     });
   </script>
 </body>
