@@ -102,20 +102,21 @@
   <footer>© 2025 AgentForge. All rights reserved.</footer>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxpsYxZcTpHr6jMHqH8-3t0a-nXUmwxc58tgWqTfSfJdLfFS4_ptX6Bo1CoPkeumr4HGg/exec'; // Replace this with your actual Google Apps Script URL
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById('msg')
+    // Replace this URL with your actual Google Apps Script Web App URL (copied after deployment)
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxiUBSGSSz0GoBA6iSrypf0MiVbgIzdH4g_wRFvxFrng6WSQMkXJJMX8yjXIMhTQ-TcnA/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById('msg');
 
     form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => {
           msg.style.display = 'block';
           setTimeout(() => msg.style.display = 'none', 4000);
           form.reset();
         })
-        .catch(error => console.error('Error!', error.message))
-    })
+        .catch(error => alert('There was an error submitting the form. Please try again.'));
+    });
   </script>
 </body>
 </html>
