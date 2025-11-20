@@ -10,7 +10,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #111827, #1f2937);
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #f9fafb;
       text-align: center;
       display: flex;
@@ -34,6 +34,50 @@
       line-height: 1.5;
       color: #d1d5db;
     }
+    .coming-soon {
+      margin-top: 1.5rem;
+      background-color: #2563eb;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    form {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    input[type="email"] {
+      padding: 0.75rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      outline: none;
+      width: 250px;
+    }
+    button {
+      padding: 0.75rem 1.25rem;
+      border-radius: 9999px;
+      border: none;
+      background-color: #2563eb;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
     footer {
       position: absolute;
       bottom: 10px;
@@ -44,8 +88,34 @@
 </head>
 <body>
   <img src="/mnt/data/icon-small.png" alt="AgentForge Logo">
-  <h1>Hello, World from AgentForge!</h1>
-  <p>Welcome to AgentForge — a place where intelligent agents and innovation are forged together.</p>
+  <h1>AgentForge</h1>
+  <p>Welcome to AgentForge — where intelligent agents and innovation are forged together.</p>
+  <div class="coming-soon">Coming Soon</div>
+
+  <form name="submit-to-google-sheet">
+    <input type="email" name="Email" placeholder="Enter your email" required>
+    <button type="submit">Notify Me</button>
+  </form>
+
+  <p id="msg" style="color:#22c55e; margin-top:1rem; display:none;">Thanks! You’ll be notified soon.</p>
+
   <footer>© 2025 AgentForge. All rights reserved.</footer>
+
+  <script>
+    const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // Replace this with your actual Google Apps Script URL
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById('msg')
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          msg.style.display = 'block';
+          setTimeout(() => msg.style.display = 'none', 4000);
+          form.reset();
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>
 </html>
