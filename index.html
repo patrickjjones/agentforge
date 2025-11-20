@@ -50,32 +50,18 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
     }
-    form {
+    a.email-link {
       margin-top: 2rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    input[type="email"] {
-      padding: 0.75rem 1rem;
-      border-radius: 9999px;
-      border: none;
-      outline: none;
-      width: 250px;
-    }
-    button {
-      padding: 0.75rem 1.25rem;
-      border-radius: 9999px;
-      border: none;
+      display: inline-block;
       background-color: #2563eb;
       color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 9999px;
       font-weight: 600;
-      cursor: pointer;
+      text-decoration: none;
       transition: background-color 0.3s;
     }
-    button:hover {
+    a.email-link:hover {
       background-color: #1d4ed8;
     }
     footer {
@@ -92,10 +78,7 @@
   <p>Welcome to AgentForge — where intelligent agents and innovation are forged together.</p>
   <div class="coming-soon">Coming Soon</div>
 
-  <form action="mailto:patrickjjones@icloud.com" method="post" enctype="text/plain">
-    <input type="email" name="Email" placeholder="Enter your email" required>
-    <button type="submit">Send</button>
-  </form>
+  <a href="mailto:patrickjjones@icloud.com?subject=AgentForge%20Waitlist&body=Hi%20Patrick,%20I'd%20like%20to%20join%20the%20AgentForge%20waitlist." class="email-link">📧 Email Us</a>
 
   <footer>© 2025 AgentForge. All rights reserved.</footer>
 </body>
